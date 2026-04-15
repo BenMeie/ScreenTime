@@ -17,7 +17,7 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 
 public final class ScreenTimeLimiter {
-	private static final String CONFIG_FILE = "safeplay.json";
+	private static final String CONFIG_FILE = "screentime.json";
 
 	private static ScreenTimeConfig config;
 	private static long lastTickMs = -1;

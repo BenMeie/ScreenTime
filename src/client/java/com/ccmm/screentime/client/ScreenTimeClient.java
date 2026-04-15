@@ -25,7 +25,7 @@ public class ScreenTimeClient implements ClientModInitializer {
 		);
 
 		OPEN_SETTINGS = KeyMappingHelper.registerKeyMapping(new KeyMapping(
-			"key.safeplay.open_settings",
+			"key.screentime.open_settings",
 			InputConstants.Type.KEYSYM,
 			GLFW.GLFW_KEY_P,
 			CATEGORY
