@@ -1,0 +1,42 @@
+{
+  "key.screentime.open_settings": "Open ScreenTime settings",
+  "category.screentime": "ScreenTime",
+  "com.ccmm.screentime.title.button": "ScreenTime",
+  "com.ccmm.screentime.settings.title": "ScreenTime Settings",
+  "com.ccmm.screentime.settings.daily_limit_box": "Daily limit (in minutes)",
+  "com.ccmm.screentime.settings.password_box": "Enter password",
+  "com.ccmm.screentime.settings.set_password_box": "Set password",
+  "com.ccmm.screentime.settings.confirm_password_box": "Confirm Password",
+  "com.ccmm.screentime.settings.save": "Save",
+  "com.ccmm.screentime.settings.back": "Back",
+  "com.ccmm.screentime.settings.limit_error": "Limit must be a number",
+  "com.ccmm.screentime.settings.password_required": "A password is required to set a limit",
+  "com.ccmm.screentime.settings.passwords_not_same": "Entered passwords are not the same",
+  "com.ccmm.screentime.settings.incorrect_password": "Password incorrect",
+  "com.ccmm.screentime.settings.limit_disabled": "ScreenTime limit disabled",
+  "com.ccmm.screentime.settings.limit": "Used %1$s of %2$s minutes",
+  "com.ccmm.screentime.settings.daily_limit": "Daily Limit:",
+  "com.ccmm.screentime.settings.enter_password": "Password (enter to change limit):",
+  "com.ccmm.screentime.settings.set_password": "Set password:",
+  "com.ccmm.screentime.settings.confirm_password": "Confirm password:",
+
+  "com.ccmm.screentime.lock.title": "Daily playtime limit reached",
+  "com.ccmm.screentime.lock.bypass": "Enter password to bypass",
+  "com.ccmm.screentime.lock.quit": "Quit game",
+  "com.ccmm.screentime.lock.no_limit": "No limit",
+  "com.ccmm.screentime.lock.used_today": "Used today: %1$s / %2$s",
+  "com.ccmm.screentime.lock.resets_daily": "This resets daily.",
+
+  "com.ccmm.screentime.bypass.title": "ScreenTime Bypass",
+  "com.ccmm.screentime.bypass.password_box": "Password",
+  "com.ccmm.screentime.bypass.bypass_today": "Bypass for today",
+  "com.ccmm.screentime.bypass.back": "Back",
+  "com.ccmm.screentime.bypass.instructions": "Enter the ScreenTime password to bypass today's limit.",
+  "com.ccmm.screentime.bypass.no_password_set": "No password is set. Set one in ScreenTime settings first.",
+  "com.ccmm.screentime.bypass.incorrect_password": "Incorrect password.",
+  "com.ccmm.screentime.bypass.enabled_today": "Bypass enabled for today.",
+
+  "com.ccmm.screentime.toast.title": "ScreenTime",
+  "com.ccmm.screentime.toast.remaining_minutes": "%1$s minute(s) remaining"
+}
+

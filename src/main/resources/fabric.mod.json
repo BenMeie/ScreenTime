@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "screentime",
+	"version": "${version}",
+	"name": "ScreenTime",
+	"description": "Limit the amount of time Minecraft can be played each day.",
+	"authors": [
+		"CrazyCowMM"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/safeplay/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.ccmm.screentime.ScreenTime"
+		],
+		"client": [
+			"com.ccmm.screentime.client.ScreenTimeClient"
+		]
+	},
+	"mixins": [],
+	"depends": {
+		"fabricloader": ">=0.19.1",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
