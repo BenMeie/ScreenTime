@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.ccmm.screentime.client.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "TitleScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
+

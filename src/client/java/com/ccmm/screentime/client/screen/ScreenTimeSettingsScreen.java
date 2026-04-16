@@ -27,33 +27,33 @@ public final class ScreenTimeSettingsScreen extends Screen {
 		ScreenTimeConfig cfg = ScreenTimeLimiter.getConfig();
 
 		int cx = this.width / 2;
-		int y = this.height / 2 - 50;
+		int y = this.height / 2 - 55;
 
 		this.limitMinutes = new EditBox(minecraft.font, cx - 100, y, 200, 20, Component.translatable("com.ccmm.screentime.settings.daily_limit_box"));
 		this.limitMinutes.setMaxLength(9);
 		this.limitMinutes.setValue(Integer.toString(Math.max(cfg.limitMinutes, 0)));
 		this.addWidget(this.limitMinutes);
 
-		y += 38;
+		y += 35;
 
 		if (cfg.hasPassword()) {
 			this.password = new EditBox(minecraft.font, cx - 100, y, 200, 20, Component.translatable("com.ccmm.screentime.settings.password_box"));
 			this.password.setMaxLength(256);
 			this.addWidget(this.password);
 
-			y += 28;
+			y += 25;
 		} else {
 			this.password = new EditBox(this.font, cx - 100, y, 200, 20, Component.translatable("com.ccmm.screentime.settings.set_password_box"));
 			this.password.setMaxLength(256);
 			this.addWidget(this.password);
 
-			y += 28;
+			y += 35;
 
 			this.passwordConfirm = new EditBox(this.font, cx - 100, y, 200, 20, Component.translatable("com.ccmm.screentime.settings.confirm_password_box"));
 			this.passwordConfirm.setMaxLength(256);
 			this.addWidget(this.passwordConfirm);
 
-			y += 28;
+			y += 25;
 		}
 
 		this.addRenderableWidget(Button.builder(Component.translatable("com.ccmm.screentime.settings.save"), b -> onSave()).bounds(cx - 100, y, 200, 20).build());
@@ -109,17 +109,17 @@ public final class ScreenTimeSettingsScreen extends Screen {
 		String used = formatDuration(cfg.usedMsToday);
 		context.centeredText(minecraft.font, Component.translatable(cfg.limitMinutes <= 0 ? "com.ccmm.screentime.settings.limit_disabled" : "com.ccmm.screentime.settings.limit", used, cfg.limitMinutes), this.width / 2, this.height / 2 - 78, ARGB.opaque(0xAAAAAA));
 
-		context.text(this.font, Component.translatable("com.ccmm.screentime.settings.daily_limit"), this.width / 2 - 100, this.height / 2 - 64, ARGB.opaque(0xDDDDDD));
+		context.text(this.font, Component.translatable("com.ccmm.screentime.settings.daily_limit"), this.width / 2 - 100, this.height / 2 - 64, ARGB.opaque(0xEEEEEE));
 		this.limitMinutes.extractWidgetRenderState(context, mouseX, mouseY, delta);
 
 		int y = this.height / 2 - 13;
 		if (cfg.hasPassword()) {
-			context.text(this.font, Component.translatable("com.ccmm.screentime.settings.enter_password"), this.width / 2 - 100, y - 12, ARGB.opaque(0xDDDDDD));
+			context.text(this.font, Component.translatable("com.ccmm.screentime.settings.enter_password"), this.width / 2 - 100, y - 16, ARGB.opaque(0xEEEEEE));
 			this.password.extractWidgetRenderState(context, mouseX, mouseY, delta);
 		} else {
-			context.text(this.font, Component.translatable("com.ccmm.screentime.settings.set_password"), this.width / 2 - 100, y - 12, ARGB.opaque(0xDDDDDD));
+			context.text(this.font, Component.translatable("com.ccmm.screentime.settings.set_password"), this.width / 2 - 100, y - 16, ARGB.opaque(0xEEEEEE));
 			this.password.extractWidgetRenderState(context, mouseX, mouseY, delta);
-			context.text(this.font, Component.translatable("com.ccmm.screentime.settings.confirm_password"), this.width / 2 - 100, y + 16, ARGB.opaque(0xDDDDDD));
+			context.text(this.font, Component.translatable("com.ccmm.screentime.settings.confirm_password"), this.width / 2 - 100, y + 19, ARGB.opaque(0xEEEEEE));
 			this.passwordConfirm.extractWidgetRenderState(context, mouseX, mouseY, delta);
 		}
 

@@ -19,7 +19,7 @@ public final class LimitReachedScreen extends Screen {
 	@Override
 	protected void init() {
 		int cx = this.width / 2;
-		int y = this.height / 2 + 10;
+		int y = this.height / 2 + 16;
 
 		this.addRenderableWidget(Button.builder(
 			Component.translatable("com.ccmm.screentime.lock.bypass"),
@@ -41,7 +41,7 @@ public final class LimitReachedScreen extends Screen {
 		String used = formatDuration(usedMs);
 		String limit = limitMs <= 0 ? Component.translatable("com.ccmm.screentime.lock.no_limit").getString() : formatDuration(limitMs);
 
-		context.centeredText(this.font, Component.translatable("com.ccmm.screentime.lock.used_today", used, limit), this.width / 2, this.height / 2 - 10, ARGB.opaque(0xDDDDDD));
+		context.centeredText(this.font, Component.translatable("com.ccmm.screentime.lock.used_today", used, limit), this.width / 2, this.height / 2 - 14, ARGB.opaque(0xDDDDDD));
 		context.centeredText(this.font, Component.translatable("com.ccmm.screentime.lock.resets_daily"), this.width / 2, this.height / 2 + 2, ARGB.opaque(0xAAAAAA));
 
 		super.extractRenderState(context, mouseX, mouseY, delta);

@@ -2,7 +2,6 @@ package com.ccmm.screentime.client;
 
 import com.ccmm.screentime.ScreenTime;
 import com.ccmm.screentime.client.screen.ScreenTimeSettingsScreen;
-import com.ccmm.screentime.client.screen.ScreenTimeTitleButtonInjector;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
@@ -46,7 +45,6 @@ public class ScreenTimeClient implements ClientModInitializer {
 		ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
 			if (screen instanceof TitleScreen) {
 				ScreenTimeLimiter.ensureNotExpiredScreen(client);
-				ScreenTimeTitleButtonInjector.inject(screen);
 			}
 		});
 	}

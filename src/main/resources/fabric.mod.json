@@ -22,7 +22,12 @@
 			"com.ccmm.screentime.client.ScreenTimeClient"
 		]
 	},
-	"mixins": [],
+	"mixins": [
+		{
+			"config": "screentime.client.mixins.json",
+			"environment": "client"
+		}
+	],
 	"depends": {
 		"fabricloader": ">=0.19.1",
 		"minecraft": "~26.1.2",

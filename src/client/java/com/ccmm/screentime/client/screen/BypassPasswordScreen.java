@@ -22,7 +22,7 @@ public final class BypassPasswordScreen extends Screen {
 	@Override
 	protected void init() {
 		int cx = this.width / 2;
-		int y = this.height / 2 - 10;
+		int y = this.height / 2 - 30;
 
 		this.password = new EditBox(this.font, cx - 100, y, 200, 20, Component.translatable("com.ccmm.screentime.bypass.password_box"));
 		this.password.setMaxLength(256);
@@ -59,7 +59,7 @@ public final class BypassPasswordScreen extends Screen {
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
 		context.centeredText(this.font, this.title, this.width / 2, this.height / 2 - 60, 0xFFFFFF);
-		context.centeredText(this.font, Component.translatable("com.ccmm.screentime.bypass.instructions"), this.width / 2, this.height / 2 - 44, ARGB.opaque(0xAAAAAA));
+		context.centeredText(this.font, Component.translatable("com.ccmm.screentime.bypass.instructions"), this.width / 2, this.height / 2 - 44, ARGB.opaque(0xFFFFFF));
 
 		this.password.extractWidgetRenderState(context, mouseX, mouseY, delta);
 		if (!status.getString().isEmpty()) {

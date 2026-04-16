@@ -1,7 +1,7 @@
 {
   "key.screentime.open_settings": "Open ScreenTime settings",
   "category.screentime": "ScreenTime",
-  "com.ccmm.screentime.title.button": "ScreenTime",
+  "com.ccmm.screentime.title.button": "🕐",
   "com.ccmm.screentime.settings.title": "ScreenTime Settings",
   "com.ccmm.screentime.settings.daily_limit_box": "Daily limit (in minutes)",
   "com.ccmm.screentime.settings.password_box": "Enter password",
