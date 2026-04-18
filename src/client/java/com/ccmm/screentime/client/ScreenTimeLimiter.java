@@ -39,6 +39,32 @@ public final class ScreenTimeLimiter {
 		return config;
 	}
 
+	/** True when playing an integrated singleplayer / LAN-hosted world (not a remote multiplayer server). */
+	public static boolean isPlayingSingleplayer(Minecraft mc) {
+		return mc != null && mc.getSingleplayerServer() != null;
+	}
+
+	/**
+	 * Effective daily cap in minutes for the current session context.
+	 * When separate SP/MP limits are on and not in a world, returns 0 (no enforcement until a world is loaded).
+	 */
+	public static int getEffectiveLimitMinutes(Minecraft mc) {
+		if (config == null) {
+			init();
+		}
+
+		ScreenTimeConfig c = config;
+		if (c.separateLimitsForSpMp) {
+			if (mc == null || mc.level == null) {
+				return 0;
+			}
+			return isPlayingSingleplayer(mc)
+				? Math.max(0, c.limitMinutesSingleplayer)
+				: Math.max(0, c.limitMinutesMultiplayer);
+		}
+		return Math.max(0, c.limitMinutes);
+	}
+
 	public static void onClientTick(Minecraft client) {
 		if (config == null) {
 			init();
@@ -46,7 +72,7 @@ public final class ScreenTimeLimiter {
 
 		ensureDailyReset();
 
-		if (isExpiredToday()) {
+		if (isExpiredToday(client)) {
 			enforceLockout(client);
 			return;
 		}
@@ -76,7 +102,7 @@ public final class ScreenTimeLimiter {
 
 		maybeToastWarnings(client);
 
-		if (isExpiredToday()) {
+		if (isExpiredToday(client)) {
 			enforceLockout(client);
 		}
 	}
@@ -86,13 +112,14 @@ public final class ScreenTimeLimiter {
 			init();
 		}
 		ensureDailyReset();
-		if (isExpiredToday()) {
+		if (isExpiredToday(client)) {
 			enforceLockout(client);
 		}
 	}
 
-	public static boolean isExpiredToday() {
-		long limitMs = config.limitMinutes <= 0 ? 0 : config.limitMinutes * 60_000L;
+	public static boolean isExpiredToday(Minecraft mc) {
+		int lim = getEffectiveLimitMinutes(mc);
+		long limitMs = lim <= 0 ? 0 : lim * 60_000L;
 		if (limitMs <= 0) return false;
 		if (isBypassedToday()) return false;
 		return config.usedMsToday >= limitMs;
@@ -119,7 +146,6 @@ public final class ScreenTimeLimiter {
 
 		LimitReachedScreen lockScreen = new LimitReachedScreen(client.screen);
 
-		// Prefer a clean disconnect so singleplayer saves and server stops.
 		if (client.level != null) {
 			if (ClientDisconnectUtil.disconnectToScreen(client, lockScreen)) {
 				return;
@@ -142,10 +168,10 @@ public final class ScreenTimeLimiter {
 	}
 
 	private static void maybeToastWarnings(Minecraft client) {
-		long limitMs = config.limitMinutes <= 0 ? 0 : config.limitMinutes * 60_000L;
+		int lim = getEffectiveLimitMinutes(client);
+		long limitMs = lim <= 0 ? 0 : lim * 60_000L;
 		if (limitMs <= 0) return;
 		if (isBypassedToday()) return;
-		if (client == null) return;
 
 		long remainingMs = limitMs - config.usedMsToday;
 		if (remainingMs <= 0) return;
@@ -172,7 +198,6 @@ public final class ScreenTimeLimiter {
 	private static void persistIfNeeded(boolean force) {
 		long now = System.currentTimeMillis();
 		if (!force) {
-			// Avoid hammering disk; save at most every ~10s or on meaningful changes.
 			if (now - lastPersistWallMs < 10_000 && lastPersistedUsedMs == config.usedMsToday) {
 				return;
 			}
@@ -221,4 +246,3 @@ public final class ScreenTimeLimiter {
 		return r;
 	}
 }
-

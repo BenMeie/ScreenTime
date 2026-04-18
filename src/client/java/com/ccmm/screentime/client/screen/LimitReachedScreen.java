@@ -36,7 +36,8 @@ public final class LimitReachedScreen extends Screen {
 	public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
 		context.centeredText(this.font, this.title, this.width / 2, this.height / 2 - 30, ARGB.opaque(0xFFFFFF));
 
-		long limitMs = ScreenTimeLimiter.getConfig().limitMinutes <= 0 ? 0 : ScreenTimeLimiter.getConfig().limitMinutes * 60_000L;
+		int lim = ScreenTimeLimiter.getEffectiveLimitMinutes(Minecraft.getInstance());
+		long limitMs = lim <= 0 ? 0 : lim * 60_000L;
 		long usedMs = ScreenTimeLimiter.getConfig().usedMsToday;
 		String used = formatDuration(usedMs);
 		String limit = limitMs <= 0 ? Component.translatable("com.ccmm.screentime.lock.no_limit").getString() : formatDuration(limitMs);

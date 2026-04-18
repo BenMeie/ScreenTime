@@ -1,6 +1,6 @@
 package com.ccmm.screentime.client.mixin;
 
-import com.ccmm.screentime.client.screen.ScreenTimeSettingsScreen;
+import com.ccmm.screentime.client.ScreenTimeUi;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -31,7 +31,7 @@ public abstract class TitleScreenMixin extends net.minecraft.client.gui.screens.
 
 		this.addRenderableWidget(Button.builder(BUTTON_TEXT, b -> {
 			if (this.minecraft != null) {
-				this.minecraft.setScreen(new ScreenTimeSettingsScreen(this));
+				ScreenTimeUi.openSettings(this);
 			}
 		}).bounds(x, y, 20, 20).build());
 	}

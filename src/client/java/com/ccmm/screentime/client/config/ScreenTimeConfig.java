@@ -11,8 +11,20 @@ import java.util.Objects;
 public final class ScreenTimeConfig {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-	// If <= 0, no limit is enforced.
+	// If <= 0, no limit is enforced (used when separateLimitsForSpMp is false).
 	public int limitMinutes;
+
+	/**
+	 * When true, {@link #limitMinutesSingleplayer} applies in singleplayer and
+	 * {@link #limitMinutesMultiplayer} applies on multiplayer; {@link #limitMinutes} is ignored for enforcement.
+	 */
+	public boolean separateLimitsForSpMp;
+
+	/** Minutes cap for singleplayer / integrated server / LAN host when separate limits are enabled. */
+	public int limitMinutesSingleplayer;
+
+	/** Minutes cap for multiplayer (remote server, etc.) when separate limits are enabled. */
+	public int limitMinutesMultiplayer;
 
 	// Playtime tracking (resets daily by local date).
 	public long usedMsToday;
@@ -30,6 +42,9 @@ public final class ScreenTimeConfig {
 	public static ScreenTimeConfig defaults() {
 		ScreenTimeConfig c = new ScreenTimeConfig();
 		c.limitMinutes = 0;
+		c.separateLimitsForSpMp = false;
+		c.limitMinutesSingleplayer = 0;
+		c.limitMinutesMultiplayer = 0;
 		c.usedMsToday = 0;
 		c.lastResetDate = null;
 		c.bypassEpochDay = -1;
@@ -40,6 +55,8 @@ public final class ScreenTimeConfig {
 
 	public ScreenTimeConfig sanitize() {
 		if (limitMinutes < 0) limitMinutes = 0;
+		if (limitMinutesSingleplayer < 0) limitMinutesSingleplayer = 0;
+		if (limitMinutesMultiplayer < 0) limitMinutesMultiplayer = 0;
 		if (usedMsToday < 0) usedMsToday = 0;
 		if (bypassEpochDay < -1) bypassEpochDay = -1;
 		if (warnedMaskToday < 0) warnedMaskToday = 0;
@@ -66,6 +83,9 @@ public final class ScreenTimeConfig {
 	public String toJson() {
 		JsonObject root = new JsonObject();
 		root.addProperty("limitMinutes", limitMinutes);
+		root.addProperty("separateLimitsForSpMp", separateLimitsForSpMp);
+		root.addProperty("limitMinutesSingleplayer", limitMinutesSingleplayer);
+		root.addProperty("limitMinutesMultiplayer", limitMinutesMultiplayer);
 		root.addProperty("usedMsToday", usedMsToday);
 		root.addProperty("lastResetDate", lastResetDate);
 		root.addProperty("bypassEpochDay", bypassEpochDay);
@@ -80,6 +100,9 @@ public final class ScreenTimeConfig {
 		JsonObject root = JsonParser.parseString(json).getAsJsonObject();
 		ScreenTimeConfig c = new ScreenTimeConfig();
 		if (root.has("limitMinutes")) c.limitMinutes = root.get("limitMinutes").getAsInt();
+		if (root.has("separateLimitsForSpMp")) c.separateLimitsForSpMp = root.get("separateLimitsForSpMp").getAsBoolean();
+		if (root.has("limitMinutesSingleplayer")) c.limitMinutesSingleplayer = root.get("limitMinutesSingleplayer").getAsInt();
+		if (root.has("limitMinutesMultiplayer")) c.limitMinutesMultiplayer = root.get("limitMinutesMultiplayer").getAsInt();
 		if (root.has("usedMsToday")) c.usedMsToday = root.get("usedMsToday").getAsLong();
 		if (root.has("lastResetDate") && !root.get("lastResetDate").isJsonNull()) c.lastResetDate = root.get("lastResetDate").getAsString();
 		if (root.has("bypassEpochDay")) c.bypassEpochDay = root.get("bypassEpochDay").getAsLong();
