@@ -51,7 +51,7 @@ public final class ScreenTimeLimiter {
 			return;
 		}
 
-		boolean countTime = !client.isPaused();
+		boolean countTime = client.level != null && !client.isPaused();
 		long now = System.currentTimeMillis();
 
 		if (!countTime) {
